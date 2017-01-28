@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -60,21 +55,29 @@ $yt_meta;
 
               for ($i=0;$i<10;$i++) {
                   ?>
-      <div class="mycard " >
-                     <div class="card z-depth-3">
-            <div class="card-image waves-effect waves-block waves-light activator">
-               <?=$bbc_img_scrap[$i]?>
-            </div>
-            <div class="card-content ">
-              <span class="card-title activator grey-text text-darken-4"><?=$bbc_title_scrap[$i]?><i class="material-icons right">more_vert</i></span>
-              <p class="card-title activator grey-text text-darken-4 "><?=$bbc_time[$i]?></p>
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4"><?=$bbc_title_scrap[$i]?><i class="material-icons right">close</i></span>
-              <p><?=$bbc_sum_scrap[$i]?></p>
-            </div>
-          </div>
-          </div>
+                  <div class="mycard">
+                                       <div class="card z-depth-3">
+                              <div class="card-image waves-effect waves-block waves-light activator">
+                                  <script type="text/javascript">
+                                    var kee = '<?=$bbc_img_scrap[$i]?>';
+                                    var bbcoutput = [kee.slice(0)].join('');
+                                    var img=bbcoutput.indexOf('class');
+                                    var d = ' activator ';
+                                    var bbcoutput = [kee.slice(0,img+7),d,kee.slice(img+7)].join('');
+                                    console.log(bbcoutput);
+                                     document.write(bbcoutput);
+                                  </script>
+                              </div>
+                              <div class="card-content ">
+                                <span class="card-title activator grey-text text-darken-4"><?=$bbc_title_scrap[$i]?><i class="material-icons right">more_vert</i></span>
+                                <p class="card-title activator grey-text text-darken-4 ">Click here to know more</p>
+                              </div>
+                              <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4"><?=$bbc_title_scrap[$i]?><i class="material-icons right">close</i></span>
+                                <p><?=$bbc_sum_scrap[$i]?></p>
+                              </div>
+                            </div>
+                            </div>
 
                    <?php
 

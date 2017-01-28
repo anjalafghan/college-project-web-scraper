@@ -67,14 +67,9 @@ align-items: center;
 align-content: center;
 }
 .mycard button{
-margin-left: 30%;
+margin-left: 25%;
 }
-select .bbc2{
-color: #000;
-}
-.you2{
-  color: #E62117;
-}
+
 </style>
 
         <!--  Scripts-->
@@ -84,6 +79,7 @@ color: #000;
         <script>
         $(document).ready(function() {
             $('select').material_select();
+             $(".button-collapse").sideNav();
           });
         </script>
 
