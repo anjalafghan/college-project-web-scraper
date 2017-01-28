@@ -30,18 +30,5 @@
  </nav>
     <div class="section no-pad-bot" id="index-banner">
     </div>
-<?php
-$url='/watch?v=MkrUW02CuBI';
-$parts = parse_url($url);
-    if(isset($parts['query'])){
-        parse_str($parts['query'], $qs);
-        if(isset($qs['v'])){
-            echo $qs['v'];
-        }else if(isset($qs['vi'])){
-            echo $qs['vi'];
-        }
-    }
-?>
-      
     </body>
 </html>
