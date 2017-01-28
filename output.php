@@ -54,7 +54,7 @@ $yt_meta;
           $html= file_get_html($user);
           foreach ($html->find('ol[class=search-results results]')as $bob) {
               $bbc_img_scrap=$bob->find('li article picture');
-$bbc_time=$bob->find('time');
+              $bbc_time=$bob->find('time');
               $bbc_title_scrap=$bob->find('li article div h1');
               $bbc_sum_scrap=$bob->find('li article div p[class="summary long"]');
 
@@ -82,41 +82,40 @@ $bbc_time=$bob->find('time');
           }
       }
         if ($rad1==='youtube') {
-            $user='https://www.youtube.com/results?search_query='.str_replace(" ", "+",$_GET["user_input"]);
+            $user='https://www.youtube.com/results?search_query='.str_replace(" ", "+", $_GET["user_input"]);
             $html= file_get_html($user);
             foreach ($html->find('ol[class=item-section]')as$bob) {
+                function getYoutubeIdFromUrl($url)
+                {
+                    $parts = parse_url($url);
+                    if (isset($parts['query'])) {
+                        parse_str($parts['query'], $qs);
+                        if (isset($qs['v'])) {
+                            return $qs['v'];
+                        } elseif (isset($qs['vi'])) {
+                            return $qs['vi'];
+                        }
+                    }
+                    if (isset($parts['path'])) {
+                        $path = explode('/', trim($parts['path'], '/'));
+                        return $path[count($path)-1];
+                    }
+                    return false;
+                }
+                $videoTitle= $bob->find('a.yt-uix-tile-link');
+
+                $yt_meta=$bob->find('ul.yt-lockup-meta-info');
+                $videodescription=$bob->find('[class="yt-lockup-description yt-ui-ellipsis yt-ui-ellipsis-2"]');
 
 
-function getYoutubeIdFromUrl($url) {
-    $parts = parse_url($url);
-    if(isset($parts['query'])){
-        parse_str($parts['query'], $qs);
-        if(isset($qs['v'])){
-            return $qs['v'];
-        }else if(isset($qs['vi'])){
-            return $qs['vi'];
-        }
-    }
-    if(isset($parts['path'])){
-        $path = explode('/', trim($parts['path'], '/'));
-        return $path[count($path)-1];
-    }
-    return false;
-}
-        $videoTitle= $bob->find('a.yt-uix-tile-link');
-
-$yt_meta=$bob->find('ul.yt-lockup-meta-info');
-       $videodescription=$bob->find('[class="yt-lockup-description yt-ui-ellipsis yt-ui-ellipsis-2"]');
-
-
-               for ($i=0;$i<19;$i++) {
-                   ?>
+                for ($i=0;$i<19;$i++) {
+                    ?>
                   <div class="mycard">
                                         <div class="card z-depth-3">
 
                                                 <div class="video-container "  >
 
-                                                           <iframe width="560" height="315" src="<?="https://www.youtube.com/embed/".substr(getYoutubeIdFromUrl($videoTitle[$i]),0,11)?>" frameborder="0" allowfullscreen></iframe>
+                                                           <iframe width="560" height="315" src="<?="https://www.youtube.com/embed/".substr(getYoutubeIdFromUrl($videoTitle[$i]), 0, 11)?>" frameborder="0" allowfullscreen></iframe>
 
 
                                             </div>
@@ -148,6 +147,7 @@ $yt_meta=$bob->find('ul.yt-lockup-meta-info');
                              </div>
                              </div>
                        <?php
+
                 }
             }
         }
