@@ -126,12 +126,18 @@ $yt_meta;
 
                                            <script type="text/javascript">
 
+// var output = [tep.slice(0,8),b,tep.slice(8+1)].join('');
     var tep='<?=$videoTitle[$i]?>';
     var b='https://youtube.com';
     var output = [tep.slice(0,8),b,tep.slice(8+1)].join('');
-    console.log(output);
+    var c = output.indexOf("class");
+    var e =output.indexOf("title");
+    // document.write(tep);
+    var d = ' target=blank ';
+    var output = [tep.slice(0,8),b,tep.slice(8+1,c-18),d,tep.slice(8+1)].join('');
     document.write(output);
 
+console.log(output);
 
                                                </script>
 
