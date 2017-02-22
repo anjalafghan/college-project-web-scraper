@@ -3,91 +3,53 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+      <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0"/>
     <title>Web Scraper</title>
-
-    <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+            <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+            <script src="js/materialize.js"></script>
 </head>
 
-<body>
-  <nav class="nav-wrapper  grey darken-4">
+<body class="background grey lighten-3">
+  <nav class="nav-wrapper grey darken-4">
            <a href="index.php" class="brand-logo center">Web Scraper</a>
            <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="about.php">About Us</a></li>
       </ul>
  </nav>
-    <div class="section no-pad-bot" id="index-banner">
-    </div>
 
-<div class="mycard">
-    <form action="output.php" method="GET">
-        <div class="row">
-      <div class="col s12 m5">
-        <div class="card-panel white z-depth-5">
-          <span class="black-text">
-            <!-- below text input -->
-              <div class="row">
-       <div class="input-field col s12">
-         <input id="Keyword" type="text" name="user_input" class="validate ">
-         <label for="Keyword" >Keyword</label>
-       </div>
-     </div>
-     <div>
-       <input-field>
-       <div class="input-field col s12">
- <select name="multi_web">
-   <option class="bbc2" value="bbc">BBC</option>
-   <option class="you2" value="youtube">YouTube</option>
- </select>
- <label>Select Website</label>
-</div>
-       </input-field>
-     </div>
-     <!-- button below -->
-     <button class="btn waves-effect waves-light" type="submit" name="action">
-    <input type="submit" value="submit" name="submit" />
-  </button>
-     <!-- container ends below -->
+<div class="container ">
+  <ul class="collapsible z-depth-2 " data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header waves-effect">Enter Keyword</div>
+        <div class="collapsible-body white lighten-2">
+          <div class="row">
+              <form class="col s12" action="output.php" method="get">
+              <div class="input-field inline col s12" onclick="Materialize.toast('Type what you want to search :)', 4000);">
+                <input id="Keyword" class="validate" type="text" name="user_input" required>
+              <label for="Keyword">Keyword</label>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    </div>
-    </form>
-</div>
-
-
-
-
-<style>
-.mycard{
-  margin-left: 37%;
-  margin-top: 10%;
-align-items: center;
-align-content: center;
-}
-.mycard button{
-margin-left: 30%;
-}
-select .bbc2{
-color: #000;
-}
-.you2{
-  color: #E62117;
-}
+      </li>
+        </ul>
+<style media="screen">
+  body .container{
+    margin-top: 15%;
+  }
 </style>
 
-        <!--  Scripts-->
-        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src="js/materialize.js"></script>
-        <script type="text/javascript"></script>
-        <script>
-        $(document).ready(function() {
-            $('select').material_select();
-          });
-        </script>
+</div>
 
 
 </body>
 
 </html>
+<script type="text/javascript">
+$(document).ready(function(){
+$('.collapsible').collapsible();
+});
+
+</script>
