@@ -1,84 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="./iconfont/material-icons.css" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
         <link rel="stylesheet" type="text/css" href="scroll-effects/assets/animate.css" />
         <link rel="stylesheet" type="text/css" href="scroll-effects/assets/demo.css" />
+     
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
         <title>Webscraper</title>
 
+        
      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 
-<style media="screen">
-  #load{
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-#loaderrow{
-background-color: #ff3;
-}
-  }
 
-</style>
     <body class="background grey lighten-2 ">
- <?php   echo  '<div class="navbar-fixed ">
-      <nav class="nav-wrapper grey darken-4 col col s15 m8 l5 ">
+<div class="navbar-fixed ">
+      <nav class="nav-wrapper grey darken-4 col s15 m8 l5 ">
           <a href="index.php" class="brand-logo center">Web Scraper</a>
       </nav>
       </div>
-      <div id="load">
-        <div class="row" id="loaderrow">
-          <div class="col s5 m5 l5 center"></div>
-          <div class="preloader-wrapper big active">
-             <div class="spinner-layer spinner-blue">
-               <div class="circle-clipper left">
-                 <div class="circle"></div>
-               </div><div class="gap-patch">
-                 <div class="circle"></div>
-               </div><div class="circle-clipper right">
-                 <div class="circle"></div>
-               </div>
-             </div>
 
-             <div class="spinner-layer spinner-red">
-               <div class="circle-clipper left">
-                 <div class="circle"></div>
-               </div><div class="gap-patch">
-                 <div class="circle"></div>
-               </div><div class="circle-clipper right">
-                 <div class="circle"></div>
-               </div>
-             </div>
-
-             <div class="spinner-layer spinner-yellow">
-               <div class="circle-clipper left">
-                 <div class="circle"></div>
-               </div><div class="gap-patch">
-                 <div class="circle"></div>
-               </div><div class="circle-clipper right">
-                 <div class="circle"></div>
-               </div>
-             </div>
-
-             <div class="spinner-layer spinner-green">
-               <div class="circle-clipper left">
-                 <div class="circle"></div>
-               </div><div class="gap-patch">
-                 <div class="circle"></div>
-               </div><div class="circle-clipper right">
-                 <div class="circle"></div>
-               </div>
-             </div>
-           </div>
-        </div>
-
-
-      <div id="contents">
-<div class="main">';
-
+<div class="main"> 
+    <?php  
 
 
 
@@ -115,8 +60,33 @@ echo '
 
 
             for ($i=0;$i<9;$i++) {
-
-               echo '<div class="mycard bbc-cards "  >
+if (empty($bbc_img_scrap[$i]))
+    {
+    if(empty($bbc_title_scrap[$i])){}
+    else{
+   echo ' <div class="card hoverable z-depth-3">
+        <div class="card-image waves-effect waves-block waves-light activator">
+            <img src="bbc-logo.jpg"height=" 50% " width="50%" alt="Data not found">
+        </div>
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">'
+                .$bbc_title_scrap[$i].'
+                <i class="material-icons right">more_vert</i>
+            </span>
+            <p class="card-title activator grey-text text-darken-4">'.$bbc_time[$i].'</p>
+    </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">
+               '.$bbc_title_scrap[$i].'
+               <i class="material-icons right">close</i>
+               <p>'.$bbc_sum_scrap[$i].'</p>
+                                    
+            </span>
+        </div>
+    </div>';}
+        
+    }
+ else {echo '<div class="mycard bbc-cards "  >
                     <div class="card hoverable z-depth-3 ">
                          <div class="card-image waves-effect waves-block waves-light activator">'.
                              $bbc_img_scrap[$i].
@@ -144,7 +114,7 @@ echo '
                     font-size: 1em;
                 }
             </style>
-';
+ ';}
 
 
               }
@@ -154,7 +124,7 @@ echo '
 
     function youtube(){
 
-        $user='https://www.youtube.com/results?search_query='.str_replace(" ", "+", $_GET["user_input"]);
+        $user='https://www.youtube.com/results?search_query='.str_replace(" ", "+", $_GET["user_input"]).'&gl=IN&hl=en-GB';
         $html= file_get_html($user);
             foreach ($html->find('ol[class=item-section]')as$selection) {
                 function getYoutubeIdFromUrl($url)
@@ -221,7 +191,7 @@ echo '
                                  <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i></span>
                                  <b> '.$yt_meta[$i].'</b>
                                  <p>'.$videodescription[$i].'</p>
-
+                                        
                                </div>
                              </div>
                              </div>';
@@ -237,7 +207,8 @@ echo '
 
 ?>
 
-
+        
+   
       <div class="row">
           <div class="col s15 m8 l5 ">
                   <div class="card black lighten-1 accent-2 " >
@@ -251,6 +222,8 @@ echo '
                   <br>
                   <?= bbc();?>
           </div>
+          
+  
               <div class="col s15 m8 l5  offset-m1 offset-l1">
                   <div class="card  red   " >
                       <div class="card-title red darken-3 white-text center-align " style="padding:5px;" >
@@ -259,25 +232,14 @@ echo '
                           </font>
                       </div>
                   </div>
-                  <br>
+                  
 <?= youtube();?>
               </div>
-      </div>
-      </div>
-<script type="text/javascript">
-document.onreadystatechange = function () {
-var state = document.readyState
-if (state == 'interactive') {
-    document.getElementById('contents').style.visibility="hidden";
-} else if (state == 'complete') {
-   setTimeout(function(){
-      document.getElementById('interactive');
-      document.getElementById('load').style.visibility="hidden";
-      document.getElementById('contents').style.visibility="visible";
-   },1000);
-}
-}
-</script>
+      
+      
 </div>
+
+</div>
+
     </body>
 </html>
