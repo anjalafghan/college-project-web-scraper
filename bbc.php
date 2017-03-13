@@ -1,23 +1,97 @@
-<?php include './simple_html_dom.php'; 
-$user='http://www.bbc.com/search?q='.$_GET["user_input"];
-
-$bbc_img_scrap;
-$bbc_time;
-$bbc_title_scrap;
-$bbc_sum_scrap;
-bbc_initial();       
-
-    function bbc_initial(){
-          $html=file_get_html('http://www.bbc.com/search?q='.$_GET["user_input"]);
-     foreach ($html->find('ol[class=search-results results]')as $bob) {
-              $bbc_img_scrap=$bob->find('li article picture');
-              $bbc_time=$bob->find('time');
-              $bbc_title_scrap=$bob->find('li article div h1');
-              $bbc_sum_scrap=$bob->find('li article div p[class="summary long"]');
+<?php
+function bbc(){
+        $user='http://www.bbc.com/search?q='.$_GET["user_input"];
+        $html= file_get_html($user);
+          foreach ($html->find('ol[class=search-results results]')as $selection) {
+              $bbc_img_scrap=$selection->find('li article picture');
+              $bbc_time=$selection->find('time');
+              $bbc_title_scrap=$selection->find('li article div h1');
+              $bbc_sum_scrap=$selection->find('li article div p[class="summary long"]');
           }
-          echo implode(" ", $bbc_img_scrap);
-          echo implode(" ", $bbc_sum_scrap);
-          echo implode(" ", $bbc_time);
-          echo implode(" ", $bbc_title_scrap);
+          if (empty($bbc_title_scrap)) {
+
+echo '
+<div class="mycard">
+                   <div class="card hoverable  z-depth-3 ">
+                        <div class="card-image waves-effect waves-block waves-light activator">
+                        <img src="confused_travolta.gif" height="50%" width=" 50% " alt="Data not found">
+                        </div>
+                       <div class="card-content ">
+                           <span class="card-title flow-text activator grey-text text-darken-4" >
+                              Data not found
+                              </span>
+                       </div>
+
+
+                   </div>
+</div>
+
+
+';
+
+          }
+          else {
+
+
+            for ($i=0;$i<9;$i++) {
+if (empty($bbc_img_scrap[$i]))
+    {
+    if(empty($bbc_title_scrap[$i])){}
+    else{
+   echo ' <div class="card hoverable z-depth-3">
+        <div class="card-image waves-effect waves-block waves-light activator">
+            <img src="bbc-logo.jpg"height=" 50% " width="30%" alt="Data not found">
+        </div>
+        <div class="card-content">
+            <span class="card-title flow-text activator grey-text text-darken-4">'
+                .$bbc_title_scrap[$i].'
+                <i class="material-icons right">more_vert</i>
+            </span>
+            <p class="card-title activator flow-text grey-text text-darken-4">'.$bbc_time[$i].'</p>
+    </div>
+        <div class="card-reveal">
+            <span class="card-title flow-text grey-text text-darken-4">
+               '.$bbc_title_scrap[$i].'
+               <i class="material-icons right">close</i>
+               <p>'.$bbc_sum_scrap[$i].'</p>
+
+            </span>
+        </div>
+    </div>';}
+
     }
-         
+ else {echo '<div class="mycard">
+                    <div class="card hoverable  z-depth-3 ">
+                         <div class="card-image waves-effect waves-block waves-light activator">'.
+                             $bbc_img_scrap[$i].
+                          '</div>
+                        <div class="card-content ">
+                            <span class="card-title flow-text activator grey-text text-darken-4" >'
+                          .$bbc_title_scrap[$i].
+                                '<i class="material-icons right">more_vert</i></span>
+                            <p class="card-title flow-text activator grey-text text-darken-4 ">
+                          Know more..
+                            </p>
+                        </div>
+                            <div class="card-reveal">
+                                <span class="card-title flow-text grey-text text-darken-4">'.
+                          $bbc_time[$i].
+                                    '<i class="material-icons right">close</i></span>
+                                <p>'.
+                          $bbc_sum_scrap[$i].
+                                '</p>
+                            </div>
+                    </div>
+                </div>
+            <style>
+                h1{
+                    font-size: 1em;
+                }
+            </style>
+ ';}
+
+
+              }
+
+      }}
+ echo'   </div>';

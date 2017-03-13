@@ -11,13 +11,21 @@
             <script src="js/materialize.js"></script>
 </head>
 
-<body class="background grey lighten-3">
-  <nav class="nav-wrapper grey darken-4">
+<body class="background col s12 m9 l3 grey lighten-3">
+
+    <nav>
+      <div  class="nav-wrapper grey darken-4">
            <a href="index.php" class="brand-logo center">Web Scraper</a>
-           <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="about.php">About Us</a></li>
+           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="about.php">How-TO</a></li>
       </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="about.php">How-TO</a></li>
+      </ul>
+      </div>
  </nav>
+
 
 <div class="container ">
   <ul class="collapsible z-depth-2 " data-collapsible="accordion">
@@ -51,5 +59,5 @@
 $(document).ready(function(){
 $('.collapsible').collapsible();
 });
-
+  $(".button-collapse").sideNav();
 </script>
