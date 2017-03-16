@@ -34,7 +34,7 @@
         <div class="collapsible-body white lighten-2">
           <div class="row">
               <form class="col s12" action="output.php" method="get">
-              <div class="input-field inline col s12" onclick="Materialize.toast('Type what you want to search :)', 4000);">
+              <div class="input-field inline col s12" id="mymaterialtoast">
                 <input id="Keyword" class="validate" type="text" name="user_input" required>
               <label for="Keyword">Keyword</label>
               </div>
@@ -60,4 +60,9 @@ $(document).ready(function(){
 $('.collapsible').collapsible();
 });
   $(".button-collapse").sideNav();
+
+  $("#mymaterialtoast").one("click", function(){
+      Materialize.toast('Type what you want to search :)', 4000);
+  });
+
 </script>

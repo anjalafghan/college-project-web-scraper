@@ -18,7 +18,7 @@ echo '
                         </div>
                        <div class="card-content ">
                            <span class="card-title flow-text activator grey-text text-darken-4" >
-                              Data not found
+                              Data not found!
                               </span>
                        </div>
 

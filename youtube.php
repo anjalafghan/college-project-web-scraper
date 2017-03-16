@@ -1,12 +1,13 @@
 <?php
-
+//.'&gl=IN&hl=en-GB
 function youtube(){
 
-        $user='https://www.youtube.com/results?search_query='.str_replace(" ", "+", $_GET["user_input"]).'&gl=IN&hl=en-GB';
+        $user='https://www.youtube.com/results?search_query='.str_replace(" ", "+", $_GET["user_input"]);
         $html= file_get_html($user);
             foreach ($html->find('ol[class=item-section]')as$selection) {
                 function getYoutubeIdFromUrl($url)
                     {
+
                         $parts = parse_url($url);
                             if (isset($parts['query'])) {
                                 parse_str($parts['query'], $qs);
@@ -33,7 +34,7 @@ function youtube(){
                                        </div>
                                       <div class="card-content ">
                                           <span class="card-title flow-text activator grey-text text-darken-4" >
-                                             Data not found
+                                             Data not found!
                                              </span>
                                       </div>
 
@@ -49,7 +50,7 @@ function youtube(){
 
 
                 for ($i=0;$i<19;$i++) {
-                   if(empty(substr(getYoutubeIdFromUrl($videoTitle[$i]), 0, 11)))//removes all user accounts
+                   if(empty(getYoutubeIdFromUrl($videoTitle[$i])))//removes all user accounts
                            {
 
                    }
@@ -99,7 +100,6 @@ function youtube(){
     var b='https://youtube.com';
     var output = [tep.slice(0,9),b,tep.slice(9)].join('');
     document.write(output);
-
                                                </script>
                                           <?php echo '<i class="material-icons right">more_vert</i></span>
                                    <p class="card-title flow-text activator grey-text text-darken-4 ">Know more...</p>
